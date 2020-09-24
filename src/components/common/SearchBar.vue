@@ -2,7 +2,7 @@
     <div>
         <el-input
                 v-model="keywords"
-                style="width: 400px"
+                style="width: 100%"
                 prefix-icon="el-icon-search"
                 @keyup.enter.native="searchClick"
                 placeholder="标题搜索">

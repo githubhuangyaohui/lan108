@@ -2,7 +2,7 @@
     <el-container>
         <!--侧边栏-->
         <el-aside class="aside" width="200px">
-            <div>
+            <div id="picture">
                 <el-carousel
                         arrow="always"
                         height="500px"
@@ -134,15 +134,23 @@ export default {
 </script>
 
 <style scoped>
-    .aside{
-        margin:1%;
+    .aside {
+        margin: 1%;
         padding: 0%;
     }
-    .main{
-        margin:1%;
+
+    #picture {
+        position: fixed;
+        width: 200px;
+        height: 500px;
+    }
+
+    .main {
+        margin: 1%;
         padding: 0%;
     }
-    .summary{
+
+    .summary {
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;

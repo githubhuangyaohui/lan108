@@ -6,9 +6,9 @@
                 mode="horizontal"
                 text-color="#333"
                 active-text-color="red"
-                style="width: 100%;min-width: 1000px">
+                style="width: 100%;min-width: 1200px">
             <el-menu-item style="border-bottom: none;padding: 0" index="/index">
-<!--Logo-->
+                <!--Logo-->
                 <el-image
                         style="width: 60px; height: 60px"
                         :src="url"></el-image>
@@ -42,18 +42,19 @@
 </template>
 
 <script>
-import SearchBar from './SearchBar'
-export default {
-  name: 'NavMenu',
-  components: {SearchBar},
-  data () {
-    return {
-      navList: [
-        {name: '/index', navItem: '首页'},
-        {name: '/lan', navItem: '专栏'},
-        {name: '/focus', navItem: '关注'},
-        {name: '/create', navItem: '投稿'},
-        {name: '/admin', navItem: '个人中心'}
+    import SearchBar from './SearchBar'
+
+    export default {
+        name: 'NavMenu',
+        components: {SearchBar},
+        data() {
+            return {
+                navList: [
+                    {name: '/index', navItem: '首页'},
+                    {name: '/lan', navItem: '专栏'},
+                    {name: '/focus', navItem: '关注'},
+                    {name: '/create', navItem: '投稿'},
+                    {name: '/admin', navItem: '个人中心'}
       ],
       url: 'static/108lan-logo.png'
     }
