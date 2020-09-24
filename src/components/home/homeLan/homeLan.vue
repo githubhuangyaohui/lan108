@@ -2,69 +2,69 @@
     <el-container>
 <!--侧边栏-->
         <el-aside class="aside" width="20%">
-            <el-card>
+            <el-card id="LanList">
                 <el-card shadow="never"
                          style="width: 100%;height: 500px;overflow-y:scroll;float: left">
                     <div v-for="item in this.roles" :key="item.id"
                          @click="getRoleMessage(item.id),getRoleBlogs(item.id),getAdminName(item.id)">
                         <el-card>
-                            {{item.rolesLanName}}
+                            {{ item.rolesLanName }}
                         </el-card>
                     </div>
                 </el-card>
             </el-card>
         </el-aside>
-<!--主体部分-->
+        <!--主体部分-->
         <el-main class="main">
-            <el-card>
-                <!--基本信息-->
-                <el-card style="width: 100%; height:250px;float: left">
-                    <el-image
-                            style="width: 200px; height: 200px;float: left"
-                            :src="this.LanRoles.rolesImg"
-                            :fit="fit"></el-image>
-                    <el-card id="rolesLanName">
-                        <span>{{this.LanRoles.rolesLanName}}</span>
+            <!--基本信息-->
+            <el-card id="messageBox" class="card1">
+                <el-image
+                        :fit="fit"
+                        :src="this.LanRoles.rolesImg"
+                        style="width: 200px; height: 200px;float: left"></el-image>
+                <el-card id="rolesLanName">
+                    <span>{{ this.LanRoles.rolesLanName }}</span>
+                </el-card>
+                <el-card id="rolesStarname">
+                    <span>代号：</span>
+                    <span>{{ this.LanRoles.rolesStarname }}</span>
+                    <span>{{ this.LanRoles.rolesNickname }}</span>
+                    <span>{{ this.LanRoles.rolesTruename }}</span>
+                </el-card>
+                <div>
+                    <el-card id="adminName">
+                        <span>管理员:</span>
+                        <span>{{ this.adminName }}</span>
                     </el-card>
-                    <el-card id="rolesStarname">
-                        <span>代号：</span>
-                        <span>{{this.LanRoles.rolesStarname}}</span>
-                        <span>{{this.LanRoles.rolesNickname}}</span>
-                        <span>{{this.LanRoles.rolesTruename}}</span>
-                    </el-card>
-                    <div>
-                        <el-card id="adminName">
-                            <span>管理员:</span>
-                            <span>{{this.adminName}}</span>
+                    <div v-if="focus" @click="unfocusRole(LanRoles.id)">
+                        <el-card class="focus">
+                            <span>已关注</span>
                         </el-card>
-                        <div v-if="focus" @click="unfocusRole(LanRoles.id)">
-                            <el-card id="focus">
-                                <span>已关注</span>
-                            </el-card>
-                        </div>
-                        <div v-else @click="focusRole(LanRoles.id)">
-                            <el-card id="focus">
-                                <span>关注</span>
-                            </el-card>
-                        </div>
                     </div>
-                </el-card>
-                <!--专栏描述-->
-                <el-card id="rolesDescription">
-                    <span>{{this.LanRoles.rolesDescription}}</span>
-                </el-card>
-                <!--专栏文章列表-->
+                    <div v-else @click="focusRole(LanRoles.id)">
+                        <el-card class="focus">
+                            <span>关注</span>
+                        </el-card>
+                    </div>
+                </div>
+            </el-card>
+            <!--专栏描述-->
+            <el-card id="rolesDescription" class="card1">
+                <span>{{ this.LanRoles.rolesDescription }}</span>
+            </el-card>
+            <!--专栏文章列表-->
+            <el-card id="adminBlogList" class="card1">
                 <div v-for="item in this.roleBlogs" :key="item.id" @click="viewBlogs(item)">
-                    <el-card shadow="hover" style="width: 100%; height: 130px">
+                    <el-card class="blogList" shadow="hover">
                         <el-image
-                                style="width: 100px; height: 100px;float: left"
+                                class="blogImage"
                                 :src="item.blogsCover"
                                 :fit="fit"></el-image>
-                        <div>
-                            <span style="font-size: 30px">{{item.blogsTitle}}</span>
+                        <div class="blogTitle">
+                            {{ item.blogsTitle }}
                         </div>
                         <div class="summary">
-                            <span>{{item.blogsSummary}}</span>
+                            {{ item.blogsSummary }}
                         </div>
                     </el-card>
                 </div>
@@ -167,6 +167,7 @@ export default {
       })
     },
     getRoleMessage (id) {
+      window.scrollTo(0, 0)
       let urlRole = '/lan/LanRoles/' + id
       console.log(urlRole)
       this.$axios.get(urlRole).then((resp) => {
@@ -197,14 +198,32 @@ export default {
 </script>
 
 <style scoped>
+    #LanList {
+        position: fixed;
+        width: 20%;
+    }
+
     .aside {
         margin: 1%;
-        padding: 0%;
+        padding: 0;
+        width: 20%;
+    }
+
+    #messageBox {
+        width: 99%;
+        height: 250px;
+        float: left;
+    }
+
+    #rolesDescription {
+        background: #EBEEF5;
+        float: left;
+        width: 99%;
     }
 
     .main {
         margin: 1%;
-        padding: 0%;
+        padding: 0;
     }
 
     #rolesLanName {
@@ -221,14 +240,15 @@ export default {
         width: 50%;
     }
 
-    #focus {
+    .focus {
         background: #E6A23C;
         float: right;
         width: 20%;
         text-align: center;
     }
 
-    #rolesDescription {
-        background: #EBEEF5;
+    #adminBlogList {
+        float: left;
+        width: 99%;
     }
 </style>

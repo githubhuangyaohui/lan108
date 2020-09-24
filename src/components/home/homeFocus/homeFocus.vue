@@ -6,16 +6,16 @@
                     <span>关注专栏推送信息</span>
                 </div>
                 <div v-for="item in blogs" :key="item.id" @click="viewBlogs(item)">
-                    <el-card shadow="hover" style="width: 100%; height: 150px">
+                    <el-card class="blogList" shadow="hover">
                         <el-image
-                                style="width: 100px; height: 100px;float: left"
+                                class="blogImage"
                                 :src="item.blogsCover"
                                 :fit="fit"></el-image>
                         <div>
-                            <span style="font-size: 30px">{{item.blogsTitle}}</span>
+                            <span class="blogTitle">{{ item.blogsTitle }}</span>
                         </div>
                         <div class="summary">
-                            <span>{{item.blogsSummary}}</span>
+                            <span>{{ item.blogsSummary }}</span>
                         </div>
                     </el-card>
                 </div>
@@ -71,11 +71,4 @@ export default {
 </script>
 
 <style scoped>
-    .summary{
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-    }
 </style>

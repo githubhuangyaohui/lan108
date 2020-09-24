@@ -2,7 +2,8 @@
     <el-container>
         <!--侧边栏-->
         <el-aside class="aside" width="200px">
-            <div id="picture">
+            <!--走马灯图片-->
+            <div id="asidePicture">
                 <el-carousel
                         arrow="always"
                         height="500px"
@@ -21,40 +22,40 @@
         </el-aside>
         <!--主体-->
         <el-main class="main">
-            <el-card shadow="never">
-                <div slot="header" class="clearfix">
-                    <span>置顶文章</span>
-                </div>
+            <!--置顶文章-->
+            <el-card class="card1" shadow="never">
                 <div v-for="item in this.blogsFirst" :key="item.id" @click="viewBlogs(item)">
-                    <el-card shadow="hover" style="width: 100%; height: 150px">
+                    <el-card class="blogList" shadow="hover">
                         <el-image
-                                style="width: 100px; height: 100px;float: left"
+                                class="blogImage"
                                 :src="item.blogsCover"
                                 :fit="fit"></el-image>
-                        <div>
-                            <span style="font-size: 30px">{{item.blogsTitle}}</span>
+                        <div class="blogTitle">
+                            {{ item.blogsTitle }}
                         </div>
                         <div class="summary">
-                            <span>{{item.blogsSummary}}</span>
+                            {{ item.blogsSummary }}
                         </div>
                     </el-card>
                 </div>
             </el-card>
-            <el-card shadow="never">
+            <!--推荐文章列表-->
+            <el-card class="card1" shadow="never">
                 <div v-for="item in this.blogs" :key="item.id" @click="viewBlogs(item)">
-                    <el-card shadow="hover" style="width: 100%; height: 150px">
+                    <el-card class="blogList" shadow="hover">
                         <el-image
-                                style="width: 100px; height: 100px;float: left"
+                                class="blogImage"
                                 :src="item.blogsCover"
                                 :fit="fit"></el-image>
-                        <div>
-                            <span style="font-size: 30px">{{item.blogsTitle}}</span>
+                        <div class="blogTitle">
+                            {{ item.blogsTitle }}
                         </div>
                         <div class="summary">
-                            <span>{{item.blogsSummary}}</span>
+                            {{ item.blogsSummary }}
                         </div>
                     </el-card>
                 </div>
+                <!--分页组件-->
                 <el-row style="text-align: center">
                     <el-pagination
                             @current-change="handleCurrentChange"
@@ -136,10 +137,10 @@ export default {
 <style scoped>
     .aside {
         margin: 1%;
-        padding: 0%;
+        padding: 0;
     }
 
-    #picture {
+    #asidePicture {
         position: fixed;
         width: 200px;
         height: 500px;
@@ -147,15 +148,8 @@ export default {
 
     .main {
         margin: 1%;
-        padding: 0%;
-    }
-
-    .summary {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
+        padding: 0;
+        width: 1000px;
     }
     .el-carousel__item h3 {
         color: #475669;
@@ -163,13 +157,5 @@ export default {
         opacity: 0.75;
         line-height: 200px;
         margin: 0;
-    }
-
-    .el-carousel__item:nth-child(2n) {
-        background-color: #99a9bf;
-    }
-
-    .el-carousel__item:nth-child(2n+1) {
-        background-color: #d3dce6;
     }
 </style>

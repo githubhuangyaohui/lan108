@@ -1,5 +1,5 @@
 <template>
-    <body>
+    <div>
         <el-menu
                 :default-active="'/index'"
                 router
@@ -29,7 +29,7 @@
             <!--用户显示-->
             <el-menu-item v-if="this.$store.state.user.id != 0" style="border-bottom: none;float:right" index="/admin">
                 <el-button type="primary" plain style="font-size: 100%">
-                    {{this.$store.state.user.userName}}
+                    {{ this.$store.state.user.userName }}
                 </el-button>
             </el-menu-item>
 
@@ -38,23 +38,23 @@
                 <search-bar></search-bar>
             </el-menu-item>
         </el-menu>
-    </body>
+    </div>
 </template>
 
 <script>
-    import SearchBar from './SearchBar'
+import SearchBar from './SearchBar'
 
-    export default {
-        name: 'NavMenu',
-        components: {SearchBar},
-        data() {
-            return {
-                navList: [
-                    {name: '/index', navItem: '首页'},
-                    {name: '/lan', navItem: '专栏'},
-                    {name: '/focus', navItem: '关注'},
-                    {name: '/create', navItem: '投稿'},
-                    {name: '/admin', navItem: '个人中心'}
+export default {
+  name: 'NavMenu',
+  components: {SearchBar},
+  data () {
+    return {
+      navList: [
+        {name: '/index', navItem: '首页'},
+        {name: '/lan', navItem: '专栏'},
+        {name: '/focus', navItem: '关注'},
+        {name: '/create', navItem: '投稿'},
+        {name: '/admin', navItem: '个人中心'}
       ],
       url: 'static/108lan-logo.png'
     }

@@ -1,63 +1,60 @@
 <template>
     <el-container>
         <el-aside class="aside">
-            <el-card>
-                <div slot="header" class="clearfix">
-                    <span>个人信息:</span>
-                </div>
-                <el-card id="userName">{{this.$store.state.user.userName}}</el-card>
-                <el-card id="userSex" v-if="this.$store.state.user.userSex">男</el-card>
-                <el-card id="userSex" v-else>女</el-card>
-                <el-card id="userEmail">{{this.$store.state.user.userEmail}}</el-card>
+            <el-card class="card1">
+                <el-card id="userName">{{ this.$store.state.user.userName }}</el-card>
+                <el-card v-if="this.$store.state.user.userSex" class="userSex">男</el-card>
+                <el-card v-else class="userSex">女</el-card>
+                <el-card id="userEmail">{{ this.$store.state.user.userEmail }}</el-card>
                 <el-card id="userLevel">
                     <span>等级:</span>
-                    {{this.$store.state.user.userLevel}}
+                    {{ this.$store.state.user.userLevel }}
                 </el-card>
             </el-card>
         </el-aside>
         <el-main class="main">
-            <el-card>
-                <el-card style="text-align: center;width: 100%">
-                    <div @click="beAuthor=true"
-                         style="font-size:100%"
-                         @mouseover.passive="mouseOver1"
-                         @mouseleave.passive="mouseLeave1"
-                         :style="active1">
-                        <el-card  class="register">
-                            注册/修改作者信息
-                        </el-card>
-                    </div>
-                    <div @click="beAdmin=true"
-                         style="font-size:100%"
-                         @mouseover.passive="mouseOver2"
-                         @mouseleave.passive="mouseLeave2"
-                         :style="active2">
-                        <el-card class="register">
-                            成为专栏管理员
-                        </el-card>
-                    </div>
-                </el-card>
-                <el-card>
-                    <div slot="header" class="clearfix">
-                        <span>专栏收录文章列表:</span>
-                    </div>
-                    <div v-for="item in this.Blogs" :key="item.id" @click="viewBlogs(item)">
-                        <el-card shadow="hover" style="width: 100%; height: 130px">
-                            <el-image
-                                    style="width: 100px; height: 100px;float: left"
-                                    :src="item.blogsCover"
-                                    :fit="fit"></el-image>
-                            <div>
-                                <span style="font-size: 30px">{{item.blogsTitle}}</span>
-                            </div>
-                            <div class="summary">
-                                <span>{{item.blogsSummary}}</span>
-                            </div>
-                        </el-card>
-                    </div>
-                </el-card>
+            <!--按钮-->
+            <el-card class="card1" style="text-align: center;width: 99%">
+                <div :style="active1"
+                     style="font-size:100%"
+                     @click="beAuthor=true"
+                     @mouseover.passive="mouseOver1"
+                     @mouseleave.passive="mouseLeave1">
+                    <el-card class="register">
+                        注册/修改作者信息
+                    </el-card>
+                </div>
+                <div :style="active2"
+                     style="font-size:100%"
+                     @click="beAdmin=true"
+                     @mouseover.passive="mouseOver2"
+                     @mouseleave.passive="mouseLeave2">
+                    <el-card class="register">
+                        成为专栏管理员
+                    </el-card>
+                </div>
             </el-card>
-<!--注册修改界面-->
+            <!--专栏列表-->
+            <el-card class="card1" style="width: 99%">
+                <div slot="header">
+                    <span>专栏收录文章列表:</span>
+                </div>
+                <div v-for="item in this.Blogs" :key="item.id" @click="viewBlogs(item)">
+                    <el-card class="blogList" shadow="hover">
+                        <el-image
+                                :fit="fit"
+                                :src="item.blogsCover"
+                                class="blogImage"></el-image>
+                        <div class="blogTitle">
+                            {{ item.blogsTitle }}
+                        </div>
+                        <div class="summary">
+                            {{ item.blogsSummary }}
+                        </div>
+                    </el-card>
+                </div>
+            </el-card>
+            <!--注册修改界面-->
             <el-dialog
                     :visible.sync="beAuthor"
                     width="40%">
@@ -65,7 +62,8 @@
                     <el-form-item>
                         <el-card>
                             <span>姓名:</span>
-                            <el-input style="width: 80%" v-model="author.authorShowName">{{author.authorShowName}}</el-input>
+                            <el-input v-model="author.authorShowName" style="width: 80%">{{ author.authorShowName }}
+                            </el-input>
                         </el-card>
                     </el-form-item>
                     <el-form-item>
@@ -227,31 +225,38 @@ export default {
 </script>
 
 <style scoped>
-    .aside{
-        margin:1%;
-        padding: 0%;
+    .aside {
+        margin: 1%;
+        padding: 0;
         width: 20%;
     }
-    .main{
-        margin:1%;
-        padding: 0%;
+
+    .main {
+        margin: 1%;
+        padding: 0;
     }
-    .register{
+
+    .register {
         background: #409EFF;
     }
-    #userName{
+
+    #userName {
         background: #F56C6C;
     }
-    #userSex{
+
+    .userSex {
         background: #67C23A;
     }
-    #userEmail{
+
+    #userEmail {
         background: #409EFF;
     }
-    #userLevel{
+
+    #userLevel {
         background: #909399;
     }
-    #adminPage{
+
+    #adminPage {
         text-align: center;
         background: #F56C6C;
     }

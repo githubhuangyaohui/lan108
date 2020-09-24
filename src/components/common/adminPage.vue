@@ -1,33 +1,31 @@
 <template>
     <el-container>
-<!--侧边导航栏-->
+        <!--侧边导航栏-->
         <el-aside class="aside">
-            <el-card>
-                <el-card shadow="never">
-                    <div @click="getsubmitBlogs">
-                        <el-card id="one">
-                            <span>收件箱</span>
-                        </el-card>
-                    </div>
-                    <div @click="getPassedBlogList">
-                        <el-card id="two">
-                            <span>通过</span>
-                        </el-card>
-                    </div>
-                    <div @click="getUnPassedBlogList">
-                        <el-card id="three">
-                            <span>未通过</span>
-                        </el-card>
-                    </div>
-                    <div @click="getRolesMessage">
-                        <el-card id="three">
-                            <span>专栏信息</span>
-                        </el-card>
-                    </div>
-                </el-card>
+            <el-card shadow="never">
+                <div @click="getsubmitBlogs">
+                    <el-card id="one">
+                        <span>收件箱</span>
+                    </el-card>
+                </div>
+                <div @click="getPassedBlogList">
+                    <el-card id="two">
+                        <span>通过</span>
+                    </el-card>
+                </div>
+                <div @click="getUnPassedBlogList">
+                    <el-card id="three">
+                        <span>未通过</span>
+                    </el-card>
+                </div>
+                <div @click="getRolesMessage">
+                    <el-card id="fore">
+                        <span>专栏信息</span>
+                    </el-card>
+                </div>
             </el-card>
         </el-aside>
-<!--主页显示栏-->
+        <!--主页显示栏-->
         <el-main class="main">
             <el-card>
                 <div slot="header" class="clearfix">
@@ -35,16 +33,16 @@
                 </div>
                 <div v-for="item in this.Blogs" :key="item.id">
                     <div  @click="viewTempBlogs(item)">
-                        <el-card shadow="hover" id="blogs">
+                        <el-card id="list" class="blogList" shadow="hover">
                             <el-image
-                                    style="width: 100px; height: 100px;float: left"
+                                    class="blogImage"
                                     :src="item.blogsCover"
                                     :fit="fit"></el-image>
-                            <div>
-                                <span style="font-size: 30px">{{item.blogsTitle}}</span>
+                            <div class="blogTitle">
+                                {{ item.blogsTitle }}
                             </div>
                             <div class="summary">
-                                <span>{{item.blogsSummary}}</span>
+                                {{ item.blogsSummary }}
                             </div>
                         </el-card>
                     </div>
@@ -224,44 +222,46 @@ export default {
 </script>
 
 <style scoped>
-    .aside{
-        margin:1%;
+    .aside {
+        margin: 1%;
         padding: 0%;
         width: 20%;
     }
-    .main{
-        margin:1%;
+
+    .main {
+        margin: 1%;
         padding: 0%;
     }
-    #one{
+
+    #one {
         background: #F56C6C;
     }
-    #two{
+
+    #two {
         background: #67C23A;
     }
-    #three{
+
+    #three {
         background: #409EFF;
     }
-    .summary{
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
+
+    #fore {
+        background: #E6A23C;
     }
-    #blogs{
-        width: 90%;
-        height: 140px;
-        float: left
+
+    #list {
+        float: left;
     }
-    #pass{
-        width: 8%;
+
+    #pass {
+        width: 100px;
         height: 70px;
         float: left;
         background: #F56C6C;
     }
-    #unpass{
-        width: 8%;
+
+    #unpass {
+        width: 100px;
         height: 70px;
         float: left;
         background: #67C23A;

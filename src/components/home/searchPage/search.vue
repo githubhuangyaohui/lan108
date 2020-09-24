@@ -2,16 +2,16 @@
     <el-container>
         <el-main>
             <div v-for="item in this.Blogs" :key="item.id" @click="viewBlogs(item)">
-                <el-card shadow="hover" style="width: 100%; height: 150px">
+                <el-card class="blogList" shadow="hover">
                     <el-image
-                            style="width: 100px; height: 100px;float: left"
+                            class="blogImage"
                             :src="item.blogsCover"
                             :fit="fit"></el-image>
-                    <div>
-                        <span style="font-size: 30px">{{item.blogsTitle}}</span>
+                    <div class="blogTitle">
+                        {{ item.blogsTitle }}
                     </div>
                     <div class="summary">
-                        <span>{{item.blogsSummary}}</span>
+                        {{ item.blogsSummary }}
                     </div>
                 </el-card>
             </div>

@@ -1,86 +1,84 @@
 <template>
     <el-container>
-        <el-main id="main">
-            <el-card shadow="never">
-<!--新建文章-->
-                <el-card style="text-align: center">
-                    <div class="el-icon-circle-plus"
-                         style="font-size:80px"
-                         @click="creatBlog"
-                         @mouseover.passive="mouseOver"
-                         @mouseleave.passive="mouseLeave"
-                         :style="active"></div>
-                </el-card>
-<!--草稿文章列表-->
-               <el-card >
-                   <div slot="header">
-                       <span>草稿</span>
-                   </div>
-                   <div v-for="item in this.BlogsTemp" :key="item.id" ref="item">
-                       <!--文章显示-->
-                      <div @click="editorBlogs(item)">
-                          <el-card id="tempBlog" shadow="hover">
-                              <el-image
-                                      style="width: 100px; height: 100px;float: left"
-                                      :src="item.blogsCover"
-                                      :fit="fit"></el-image>
-                              <div>
-                                  <span style="font-size: 30px">{{item.blogsTitle}}</span>
-                              </div>
-                              <div class="summary">
-                                  <span>{{item.blogsSummary}}</span>
-                              </div>
-                          </el-card>
-                      </div>
-                       <!--删除按钮-->
-                       <div @click="deleteTempBlog(item)">
-                           <el-card id="tempDelete">
-                               <span>删除</span>
-                           </el-card>
-                       </div>
-                       <!--预览按钮-->
-                       <div @click="viewTempBlog(item)">
-                           <el-card id="tempView">
-                               <span>预览</span>
-                           </el-card>
-                       </div>
-                   </div>
-               </el-card>
-<!--投稿文章列表-->
-                <el-card>
-                    <div slot="header">
-                        <span>投稿</span>
+        <el-main>
+            <!--新建文章-->
+            <el-card class="card1" style="text-align: center">
+                <div :style="active"
+                     class="el-icon-circle-plus"
+                     style="font-size:80px"
+                     @click="creatBlog"
+                     @mouseover.passive="mouseOver"
+                     @mouseleave.passive="mouseLeave"></div>
+            </el-card>
+            <!--草稿文章列表-->
+            <el-card class="card1">
+                <div slot="header">
+                    <span>草稿</span>
+                </div>
+                <div v-for="item in this.BlogsTemp" :key="item.id" ref="item">
+                    <!--文章显示-->
+                    <div @click="editorBlogs(item)">
+                        <el-card class="tempBlog" shadow="hover">
+                            <el-image
+                                    :fit="fit"
+                                    :src="item.blogsCover"
+                                    style="width: 100px; height: 100px;float: left"></el-image>
+                            <div>
+                                <span style="font-size: 30px">{{ item.blogsTitle }}</span>
+                            </div>
+                            <div class="summary">
+                                <span>{{ item.blogsSummary }}</span>
+                            </div>
+                        </el-card>
                     </div>
-                    <div v-for="item in this.BlogsTempSubmit" :key="item.id" ref="item">
-                        <!--投稿文章-->
-                        <div @click="editorBlogs(item)">
-                            <el-card id="submitBlog" shadow="hover">
-                                <el-image
-                                        style="width: 100px; height: 100px;float: left"
-                                        :src="item.blogsCover"
-                                        :fit="fit"></el-image>
-                                <div>
-                                    <span style="font-size: 30px">{{item.blogsTitle}}</span>
-                                </div>
-                                <div class="summary">
-                                    <span>{{item.blogsSummary}}</span>
-                                </div>
-                            </el-card>
-                        </div>
-                        <!--删除按钮-->
-                        <div @click="deleteTempBlog(item)">
-                            <el-card id="submitDelete">
-                                <span>删除</span>
-                            </el-card>
-                        </div>
-                        <!--撤销删除按钮-->
-                        <div @click="unSubmitTempBlog(item)">
-                            <el-card id="unSubmit">
-                                <span>撤销</span>
-                            </el-card>
-                        </div>
+                    <!--删除按钮-->
+                    <div @click="deleteTempBlog(item)">
+                        <el-card id="tempDelete">
+                            <span>删除</span>
+                        </el-card>
                     </div>
-                </el-card>
+                    <!--预览按钮-->
+                    <div @click="viewTempBlog(item)">
+                        <el-card id="tempView">
+                            <span>预览</span>
+                        </el-card>
+                    </div>
+                </div>
+            </el-card>
+            <!--投稿文章列表-->
+            <el-card class="card1">
+                <div slot="header">
+                    <span>投稿</span>
+                </div>
+                <div v-for="item in this.BlogsTempSubmit" :key="item.id" ref="item">
+                    <!--投稿文章-->
+                    <div @click="editorBlogs(item)">
+                        <el-card class="tempBlog" shadow="hover">
+                            <el-image
+                                    :fit="fit"
+                                    :src="item.blogsCover"
+                                    class="blogImage"></el-image>
+                            <div class="blogTitle">
+                                {{ item.blogsTitle }}
+                            </div>
+                            <div class="summary">
+                                {{ item.blogsSummary }}
+                            </div>
+                        </el-card>
+                    </div>
+                    <!--删除按钮-->
+                    <div @click="deleteTempBlog(item)">
+                        <el-card id="submitDelete">
+                            <span>删除</span>
+                        </el-card>
+                    </div>
+                    <!--撤销删除按钮-->
+                    <div @click="unSubmitTempBlog(item)">
+                        <el-card id="unSubmit">
+                            <span>撤销</span>
+                        </el-card>
+                    </div>
+                </div>
             </el-card>
         </el-main>
     </el-container>
@@ -223,38 +221,39 @@ export default {
 </script>
 
 <style scoped>
+    .card1 {
+    }
 
-    #tempBlog{
+    .tempBlog {
         width: 90%;
-        height: 120px;
+        height: 150px;
         float: left;
     }
-    #tempDelete{
-        width: 8%;
-        height: 60px;
+
+    #tempDelete {
+        width: 100px;
+        height: 70px;
         float: left;
         background: #F56C6C;
     }
-    #tempView{
-        width: 8%;
-        height: 60px;
+
+    #tempView {
+        width: 100px;
+        height: 70px;
         float: left;
         background: #67C23A;
     }
-    #submitBlog{
-        width: 90%;
-        height: 120px;
-        float: left;
-    }
-    #submitDelete{
-        width: 8%;
-        height: 60px;
+
+    #submitDelete {
+        width: 100px;
+        height: 70px;
         float: left;
         background: #F56C6C;
     }
-    #unSubmit{
-        width: 8%;
-        height: 60px;
+
+    #unSubmit {
+        width: 100px;
+        height: 70px;
         float: left;
         background: #409EFF;
     }
