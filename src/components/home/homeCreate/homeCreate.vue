@@ -147,7 +147,7 @@ export default {
     editorBlogs (item) {
       console.log('编辑文章')
       let routerJump = this.$router.resolve({
-        path: '/editor', query: {LanBlogs: JSON.stringify(item)}
+        path: '/editor', query: {id: item.id, blogsAuthorId: item.blogsAuthorId}
       })
       window.open(routerJump.href, '_blank')
     },

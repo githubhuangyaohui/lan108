@@ -50,7 +50,7 @@
                         position: fixed;
                         right: 25px;
                         bottom: 30%">
-                <div  @click="drawer = true">
+                <div v-if="this.$store.state.user.id!=0" @click="drawer = true">
                     <el-card style="background: #409EFF; width: 60px; height: 60px;">
                         <i class="el-icon-s-promotion"></i>
                     </el-card>

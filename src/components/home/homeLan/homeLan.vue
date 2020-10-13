@@ -36,15 +36,17 @@
                         <span>管理员:</span>
                         <span>{{ this.adminName }}</span>
                     </el-card>
-                    <div v-if="focus" @click="unfocusRole(LanRoles.id)">
-                        <el-card class="focus">
-                            <span>已关注</span>
-                        </el-card>
-                    </div>
-                    <div v-else @click="focusRole(LanRoles.id)">
-                        <el-card class="focus">
-                            <span>关注</span>
-                        </el-card>
+                    <div v-if="this.$store.state.user.id!=0">
+                        <div v-if="focus" @click="unfocusRole(LanRoles.id)">
+                            <el-card class="focus">
+                                <span>已关注</span>
+                            </el-card>
+                        </div>
+                        <div v-else @click="focusRole(LanRoles.id)">
+                            <el-card class="focus">
+                                <span>关注</span>
+                            </el-card>
+                        </div>
                     </div>
                 </div>
             </el-card>
@@ -137,16 +139,19 @@ export default {
       })
     },
     getIsFocus (id) {
-      this.$axios.post('/lan/rolesFocus', {
-        roleId: id,
-        userID: this.$store.state.user.id
-      }).then((resp) => {
-        if (resp.data.number === '200') {
-          this.focus = true
-        } else {
-          this.focus = false
-        }
-      })
+      // eslint-disable-next-line eqeqeq
+      if (this.$store.state.user.id != 0) {
+        this.$axios.post('/lan/rolesFocus', {
+          roleId: id,
+          userID: this.$store.state.user.id
+        }).then((resp) => {
+          if (resp.data.number === '200') {
+            this.focus = true
+          } else {
+            this.focus = false
+          }
+        })
+      }
     },
     loadRoles () {
       this.$axios.get('/lan/rolesName').then((resp) => {

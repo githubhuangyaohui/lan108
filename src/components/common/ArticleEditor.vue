@@ -148,12 +148,15 @@ export default {
     }
   },
   mounted () {
-    if (this.$route.query.LanBlogs) {
-      this.LanBlogs = JSON.parse(this.$route.query.LanBlogs)
-      console.log(this.LanBlogs)
-    } else {
-      this.getAuthorID()
-    }
+    this.LanBlogs.id = this.$route.query.id
+    this.LanBlogs.blogsAuthorId = this.$route.query.blogsAuthorId
+    this.$axios.post('/blogTemp/editorTempBlog', {
+      id: this.LanBlogs.id
+    }).then((response) => {
+      this.LanBlogs = response.data
+    }).catch(() => {
+      this.$message('获取失败')
+    })
     this.LoadLanName()
   },
   methods: {

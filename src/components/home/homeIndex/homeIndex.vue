@@ -141,7 +141,6 @@ export default {
     }
 
     #asidePicture {
-        position: fixed;
         width: 200px;
         height: 500px;
     }

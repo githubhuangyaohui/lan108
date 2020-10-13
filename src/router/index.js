@@ -51,7 +51,7 @@ export default new Router({
           component: homeLan,
           meta: {
             // 设置登录拦截
-            requireAuth: true
+            requireAuth: false
           }
         },
         {
@@ -119,7 +119,7 @@ export default new Router({
       component: ArticleView,
       meta: {
         // 设置登录拦截
-        requireAuth: true
+        requireAuth: false
       },
       children: [
         {
