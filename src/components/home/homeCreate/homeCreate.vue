@@ -2,7 +2,7 @@
     <el-container>
         <el-main>
             <!--新建文章-->
-            <el-card class="card1" style="text-align: center">
+            <el-card class="card1" style="text-align: center;background: #fafafa">
                 <div :style="active"
                      class="el-icon-circle-plus"
                      style="font-size:80px"
@@ -18,7 +18,7 @@
                 <div v-for="item in this.BlogsTemp" :key="item.id" ref="item">
                     <!--文章显示-->
                     <div @click="editorBlogs(item)">
-                        <el-card class="tempBlog" shadow="hover">
+                        <el-card class="card-main" shadow="hover">
                             <el-image
                                     :fit="fit"
                                     :src="item.blogsCover"
@@ -33,13 +33,13 @@
                     </div>
                     <!--删除按钮-->
                     <div @click="deleteTempBlog(item)">
-                        <el-card id="tempDelete">
+                        <el-card class="card-aside">
                             <span>删除</span>
                         </el-card>
                     </div>
                     <!--预览按钮-->
                     <div @click="viewTempBlog(item)">
-                        <el-card id="tempView">
+                        <el-card class="card-aside2">
                             <span>预览</span>
                         </el-card>
                     </div>
@@ -53,7 +53,7 @@
                 <div v-for="item in this.BlogsTempSubmit" :key="item.id" ref="item">
                     <!--投稿文章-->
                     <div @click="editorBlogs(item)">
-                        <el-card class="tempBlog" shadow="hover">
+                        <el-card class="card-main" shadow="hover">
                             <el-image
                                     :fit="fit"
                                     :src="item.blogsCover"
@@ -68,13 +68,13 @@
                     </div>
                     <!--删除按钮-->
                     <div @click="deleteTempBlog(item)">
-                        <el-card id="submitDelete">
+                        <el-card class="card-aside">
                             <span>删除</span>
                         </el-card>
                     </div>
                     <!--撤销删除按钮-->
                     <div @click="unSubmitTempBlog(item)">
-                        <el-card id="unSubmit">
+                        <el-card class="card-aside2" style="background: #E6A23C">
                             <span>撤销</span>
                         </el-card>
                     </div>
@@ -153,11 +153,12 @@ export default {
     },
     // 创建新博客
     creatBlog () {
+      console.log('创建新博客')
       this.$axios.post('/author/getAuthorID', {
         userId: this.$store.state.user.id
       }).then((response) => {
         if (response.data !== 0) {
-          this.BlogsTemp.blogsAuthorId = response.data
+          this.BlogsTemp = response.data
           let routeUrl = this.$router.resolve({path: '/editor'})
           window.open(routeUrl.href, '_blank')
           this.initPage()
@@ -208,7 +209,9 @@ export default {
             userAuthorId: this.authorID
           }).then((resp) => {
             if (resp && resp.status === 200) {
+              console.log('返回投稿博客')
               this.BlogsTempSubmit = resp.data
+              console.log(this.BlogsTempSubmit)
             }
           }).catch(() => {
             this.$message('获取失败')
@@ -221,40 +224,4 @@ export default {
 </script>
 
 <style scoped>
-    .card1 {
-    }
-
-    .tempBlog {
-        width: 90%;
-        height: 150px;
-        float: left;
-    }
-
-    #tempDelete {
-        width: 100px;
-        height: 70px;
-        float: left;
-        background: #F56C6C;
-    }
-
-    #tempView {
-        width: 100px;
-        height: 70px;
-        float: left;
-        background: #67C23A;
-    }
-
-    #submitDelete {
-        width: 100px;
-        height: 70px;
-        float: left;
-        background: #F56C6C;
-    }
-
-    #unSubmit {
-        width: 100px;
-        height: 70px;
-        float: left;
-        background: #409EFF;
-    }
 </style>

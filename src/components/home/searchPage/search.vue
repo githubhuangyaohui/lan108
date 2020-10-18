@@ -1,20 +1,30 @@
 <template>
     <el-container>
         <el-main>
-            <div v-for="item in this.Blogs" :key="item.id" @click="viewBlogs(item)">
-                <el-card class="blogList" shadow="hover">
-                    <el-image
-                            class="blogImage"
-                            :src="item.blogsCover"
-                            :fit="fit"></el-image>
-                    <div class="blogTitle">
-                        {{ item.blogsTitle }}
+            <el-card class="card1">
+                <div v-for="item in this.Blogs" :key="item.id">
+                    <div @click="viewBlogs(item)">
+                        <el-card class="card-main" shadow="hover">
+                            <el-image
+                                    class="blogImage"
+                                    :src="item.blogsCover"
+                                    :fit="fit"></el-image>
+                            <div class="blogTitle">
+                                {{ item.blogsTitle }}
+                            </div>
+                            <div class="summary">
+                                {{ item.blogsSummary }}
+                            </div>
+                        </el-card><el-card class="card-aside">
+                        <span>热度(待开发)</span>
+                    </el-card>
+                        <el-card class="card-aside2">
+                            <span>按钮(待开发)</span>
+                        </el-card>
+
                     </div>
-                    <div class="summary">
-                        {{ item.blogsSummary }}
-                    </div>
-                </el-card>
-            </div>
+                </div>
+            </el-card>
         </el-main>
     </el-container>
 </template>

@@ -13,6 +13,7 @@
       <!--密码输入框-->
       <el-form-item>
         <el-input type="password" v-model="loginForm.password"
+                  @keyup.enter.native="login"
                   auto-complete="off" placeholder="密码"></el-input>
       </el-form-item>
       <!--登录注册按钮-->

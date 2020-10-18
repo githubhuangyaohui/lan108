@@ -10,30 +10,30 @@
                                    :src="this.LanBlogsTemp.blogsCover"
                                    :fit="fit"></el-image>
                        </el-card>
-                        <el-card>
+                        <el-card style="background: #F56C6C">
                             <div slot="header">
                                 <span>标题:</span>
                             </div>
                             {{this.LanBlogsTemp.blogsTitle}}
                         </el-card>
-                        <el-card>
+                        <el-card style="background: #67C23A">
                             <div slot="header">
                                 <span>所属栏目:</span>
                             </div>
                         </el-card>
-                        <el-card>
+                        <el-card style="background: #409EFF">
                             <div slot="header">
                                 <span>作者:</span>
                             </div>
                             {{this.Author.authorShowName}}
                         </el-card>
-                        <el-card>
+                        <el-card style="background: #E6A23C">
                             <div slot="header">
                                 <span>联系方式:</span>
                             </div>
                             {{this.Author.authorEmail}}
                         </el-card>
-                        <el-card>
+                        <el-card style="background: #909399">
                             <div slot="header">
                                 <span>摘要:</span>
                             </div>

@@ -10,31 +10,31 @@
                                 :src="this.LanBlogs.blogsCover"
                                 :fit="fit"></el-image>
                     </el-card>
-                    <el-card>
+                    <el-card style="background: #F56C6C">
                         <div slot="header">
                             <span>标题:</span>
                         </div>
                         {{this.LanBlogs.blogsTitle}}
                     </el-card>
-                    <el-card>
+                    <el-card style="background: #67C23A">
                         <div slot="header">
                             <span>所属栏目:</span>
                         </div>
                         <span>{{this.role.rolesLanName}}</span>
                         </el-card>
-                    <el-card>
+                    <el-card style="background: #409EFF">
                         <div slot="header">
                             <span>作者:</span>
                         </div>
                         {{this.Author.authorShowName}}
                     </el-card>
-                    <el-card>
+                    <el-card style="background: #E6A23C">
                         <div slot="header">
                             <span>联系方式:</span>
                         </div>
                         {{this.Author.authorEmail}}
                     </el-card>
-                    <el-card>
+                    <el-card style="background: #909399">
                         <div slot="header">
                             <span>摘要:</span>
                         </div>
@@ -44,7 +44,7 @@
             </div>
         </el-aside>
 <!--主体部分-->
-        <el-main class="main">
+        <el-main>
             <div v-if="drawer==false"
                  style="z-index: 9999;
                         position: fixed;
@@ -62,7 +62,8 @@
                 </a>
             </div>
             <el-card>
-                <mavon-editor style="padding: 20px" v-html="LanBlogs.blogsHtml"></mavon-editor>
+                <div class="markdown-body" v-html="LanBlogs.blogsHtml" v-highlight></div>
+<!--                <mavon-editor style="padding: 20px" v-html="LanBlogs.blogsHtml"></mavon-editor>-->
                 <el-card>{{this.LanBlogs.blogsCreateData}}</el-card>
             </el-card>
             <div>
@@ -151,8 +152,5 @@ export default {
     .main{
         margin:1%;
         padding: 0%;
-    }
-    #blog-image{
-        padding: 0px;
     }
 </style>

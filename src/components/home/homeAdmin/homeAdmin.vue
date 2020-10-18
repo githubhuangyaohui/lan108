@@ -1,7 +1,7 @@
 <template>
     <el-container>
         <el-aside class="aside">
-            <el-card class="card1">
+            <el-card class="card1" style="background: #fafafa">
                 <el-card id="userName">{{ this.$store.state.user.userName }}</el-card>
                 <el-card v-if="this.$store.state.user.userSex" class="userSex">男</el-card>
                 <el-card v-else class="userSex">女</el-card>
@@ -14,7 +14,7 @@
         </el-aside>
         <el-main class="main">
             <!--按钮-->
-            <el-card class="card1" style="text-align: center;width: 99%">
+            <el-card class="card1" style="background: #fafafa;text-align: center;width: 99%">
                 <div :style="active1"
                      style="font-size:100%"
                      @click="beAuthor=true"
@@ -39,18 +39,26 @@
                 <div slot="header">
                     <span>专栏收录文章列表:</span>
                 </div>
-                <div v-for="item in this.Blogs" :key="item.id" @click="viewBlogs(item)">
-                    <el-card class="blogList" shadow="hover">
-                        <el-image
-                                :fit="fit"
-                                :src="item.blogsCover"
-                                class="blogImage"></el-image>
-                        <div class="blogTitle">
-                            {{ item.blogsTitle }}
-                        </div>
-                        <div class="summary">
-                            {{ item.blogsSummary }}
-                        </div>
+                <div v-for="item in this.Blogs" :key="item.id">
+                    <div @click="viewBlogs(item)">
+                        <el-card class="card-main" shadow="hover">
+                            <el-image
+                                    :fit="fit"
+                                    :src="item.blogsCover"
+                                    class="blogImage"></el-image>
+                            <div class="blogTitle">
+                                {{ item.blogsTitle }}
+                            </div>
+                            <div class="summary">
+                                {{ item.blogsSummary }}
+                            </div>
+                        </el-card>
+                    </div>
+                    <el-card class="card-aside">
+                        <span>按钮(待开发)</span>
+                    </el-card>
+                    <el-card class="card-aside2">
+                        <span>按钮(待开发)</span>
                     </el-card>
                 </div>
             </el-card>
@@ -61,7 +69,7 @@
                 <el-form>
                     <el-form-item>
                         <el-card>
-                            <span>姓名:</span>
+                            <span>笔名:</span>
                             <el-input v-model="author.authorShowName" style="width: 80%">{{ author.authorShowName }}
                             </el-input>
                         </el-card>

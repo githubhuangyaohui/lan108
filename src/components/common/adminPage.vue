@@ -33,7 +33,7 @@
                 </div>
                 <div v-for="item in this.Blogs" :key="item.id">
                     <div  @click="viewTempBlogs(item)">
-                        <el-card id="list" class="blogList" shadow="hover">
+                        <el-card id="list" class="card-main" shadow="hover">
                             <el-image
                                     class="blogImage"
                                     :src="item.blogsCover"
@@ -47,12 +47,12 @@
                         </el-card>
                     </div>
                     <div  @click="passBlogs(item)" v-if="passUnpass">
-                        <el-card shadow="hover" id="pass">
+                        <el-card shadow="hover" class="card-aside">
                             <span>通过</span>
                         </el-card>
                     </div>
                     <div  @click="unPassBlogs(item)" v-if="passUnpass">
-                        <el-card shadow="hover" id="unpass">
+                        <el-card shadow="hover" class="card-aside2">
                             <span>不通过</span>
                         </el-card>
                     </div>

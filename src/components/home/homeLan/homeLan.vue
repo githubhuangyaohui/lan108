@@ -4,10 +4,10 @@
         <el-aside class="aside" width="20%">
             <el-card id="LanList">
                 <el-card shadow="never"
-                         style="width: 100%;height: 500px;overflow-y:scroll;float: left">
+                         style="width: 100%;height: 500px;overflow-y:scroll;float: left;background: #E4E7ED">
                     <div v-for="item in this.roles" :key="item.id"
                          @click="getRoleMessage(item.id),getRoleBlogs(item.id),getAdminName(item.id)">
-                        <el-card>
+                        <el-card style="background: #409EFF">
                             {{ item.rolesLanName }}
                         </el-card>
                     </div>
@@ -55,20 +55,30 @@
                 <span>{{ this.LanRoles.rolesDescription }}</span>
             </el-card>
             <!--专栏文章列表-->
-            <el-card id="adminBlogList" class="card1">
-                <div v-for="item in this.roleBlogs" :key="item.id" @click="viewBlogs(item)">
-                    <el-card class="blogList" shadow="hover">
-                        <el-image
-                                class="blogImage"
-                                :src="item.blogsCover"
-                                :fit="fit"></el-image>
-                        <div class="blogTitle">
-                            {{ item.blogsTitle }}
+            <el-card id="adminBlogList" class="card1" shadow="never">
+                <div v-for="item in this.roleBlogs" :key="item.id">
+                    <div @click="viewBlogs(item)">
+                        <el-card class="card-main" shadow="hover">
+                            <el-image
+                                    class="blogImage"
+                                    :src="item.blogsCover"
+                                    :fit="fit"></el-image>
+                            <div class="blogTitle">
+                                {{ item.blogsTitle }}
+                            </div>
+                            <div class="summary">
+                                {{ item.blogsSummary }}
+                            </div>
+                        </el-card>
+                        <el-card class="card-aside">
+                            <span>热度(待开发)</span>
+                        </el-card>
+                        <div @click="viewAuthor(item)">
+                            <el-card class="card-aside2">
+                                <span>查看作者信息</span>
+                            </el-card>
                         </div>
-                        <div class="summary">
-                            {{ item.blogsSummary }}
-                        </div>
-                    </el-card>
+                    </div>
                 </div>
             </el-card>
         </el-main>
@@ -110,6 +120,13 @@ export default {
     this.getAdminName(1)
   },
   methods: {
+    viewAuthor (item) {
+      console.log('查看作者信息')
+      let routerJump = this.$router.resolve({
+        path: '/viewAuthor', query: {blogsAuthorId: item.blogsAuthorId}
+      })
+      window.open(routerJump.href, '_blank')
+    },
     focusRole (id) {
       console.log('获得关注:' + id)
       this.$axios.post('/lan/getFocus', {
@@ -206,6 +223,7 @@ export default {
     #LanList {
         position: fixed;
         width: 20%;
+        background: #fafafa;
     }
 
     .aside {
@@ -218,6 +236,7 @@ export default {
         width: 99%;
         height: 250px;
         float: left;
+        background: #fafafa;
     }
 
     #rolesDescription {
@@ -255,5 +274,6 @@ export default {
     #adminBlogList {
         float: left;
         width: 99%;
+        min-height: 500px;
     }
 </style>

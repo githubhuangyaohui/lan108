@@ -22,47 +22,64 @@
         </el-aside>
         <!--主体-->
         <el-main class="main">
-            <!--置顶文章-->
-            <el-card class="card1" shadow="never">
-                <div v-for="item in this.blogsFirst" :key="item.id" @click="viewBlogs(item)">
-                    <el-card class="blogList" shadow="hover">
-                        <el-image
-                                class="blogImage"
-                                :src="item.blogsCover"
-                                :fit="fit"></el-image>
-                        <div class="blogTitle">
-                            {{ item.blogsTitle }}
-                        </div>
-                        <div class="summary">
-                            {{ item.blogsSummary }}
-                        </div>
-                    </el-card>
-                </div>
-            </el-card>
+<!--            &lt;!&ndash;置顶文章&ndash;&gt;-->
+<!--            <el-card class="card1" shadow="never">-->
+<!--                <div v-for="item in this.blogsFirst" :key="item.id">-->
+<!--                    <div @click="viewBlogs(item)">-->
+<!--                        <el-card class="card-main" shadow="hover">-->
+<!--                            <el-image-->
+<!--                                    class="blogImage"-->
+<!--                                    :src="item.blogsCover"-->
+<!--                                    :fit="fit"></el-image>-->
+<!--                            <div class="blogTitle">-->
+<!--                                {{ item.blogsTitle }}-->
+<!--                            </div>-->
+<!--                            <div class="summary">-->
+<!--                                {{ item.blogsSummary }}-->
+<!--                            </div>-->
+<!--                        </el-card>-->
+<!--                    </div>-->
+<!--                    <div class="card-aside">-->
+<!--                        <el-card>赞</el-card>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </el-card>-->
             <!--推荐文章列表-->
             <el-card class="card1" shadow="never">
-                <div v-for="item in this.blogs" :key="item.id" @click="viewBlogs(item)">
-                    <el-card class="blogList" shadow="hover">
-                        <el-image
-                                class="blogImage"
-                                :src="item.blogsCover"
-                                :fit="fit"></el-image>
-                        <div class="blogTitle">
-                            {{ item.blogsTitle }}
-                        </div>
-                        <div class="summary">
-                            {{ item.blogsSummary }}
-                        </div>
-                    </el-card>
+                <div v-for="item in this.blogs" :key="item.id">
+                    <div @click="viewBlogs(item)">
+                        <el-card class="card-main" shadow="hover">
+                            <el-image
+                                    class="blogImage"
+                                    :src="item.blogsCover"
+                                    :fit="fit"></el-image>
+                            <div class="blogTitle">
+                                {{ item.blogsTitle }}
+                            </div>
+                            <div class="summary">
+                                {{ item.blogsSummary }}
+                            </div>
+                        </el-card>
+                    </div>
+                    <div>
+                        <el-card class="card-aside">
+                            <span>热度(待开发)</span>
+                        </el-card>
+                    </div>
+                    <div @click="viewAuthor(item)">
+                        <el-card class="card-aside2">
+                            <span>查看作者信息</span>
+                        </el-card>
+                    </div>
                 </div>
-                <!--分页组件-->
-                <el-row style="text-align: center">
-                    <el-pagination
-                            @current-change="handleCurrentChange"
-                            :current-page="currentPage"
-                            :page-size="pageSize">
-                    </el-pagination>
-                </el-row>
+            </el-card>
+            <!--分页组件-->
+            <el-card class="card1" style="text-align: center">
+                <el-pagination
+                        @current-change="handleCurrentChange"
+                        :current-page="currentPage"
+                        :page-size="pageSize">
+                </el-pagination>
             </el-card>
         </el-main>
     </el-container>
@@ -90,6 +107,13 @@ export default {
     this.loadBlogsFirst()
   },
   methods: {
+    viewAuthor (item) {
+      console.log('查看作者信息')
+      let routerJump = this.$router.resolve({
+        path: '/viewAuthor', query: {blogsAuthorId: item.blogsAuthorId}
+      })
+      window.open(routerJump.href, '_blank')
+    },
     loadImage () {
       this.$axios.post('/home/index/image').then((resp) => {
         if (resp && resp.status === 200) {

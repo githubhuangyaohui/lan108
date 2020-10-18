@@ -14,6 +14,7 @@ import homeLan from '../components/home/homeLan/homeLan'
 import adminPage from '../components/common/adminPage'
 import ArticleTempView from '../components/common/ArticleTempView'
 import CheatBox from '../components/common/CheatBox'
+import authorPage from '../components/common/authorPage'
 
 Vue.use(Router)
 
@@ -112,6 +113,15 @@ export default new Router({
       path: '/register',
       name: 'register',
       component: register
+    },
+    {
+      path: '/viewAuthor',
+      name: 'authorPage',
+      component: authorPage,
+      meta: {
+        // 设置登录拦截
+        requireAuth: false
+      }
     },
     {
       path: '/viewBlog',

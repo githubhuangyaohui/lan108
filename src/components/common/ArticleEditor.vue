@@ -148,15 +148,19 @@ export default {
     }
   },
   mounted () {
-    this.LanBlogs.id = this.$route.query.id
-    this.LanBlogs.blogsAuthorId = this.$route.query.blogsAuthorId
-    this.$axios.post('/blogTemp/editorTempBlog', {
-      id: this.LanBlogs.id
-    }).then((response) => {
-      this.LanBlogs = response.data
-    }).catch(() => {
-      this.$message('获取失败')
-    })
+    if (this.$route.query.id) {
+      this.LanBlogs.id = this.$route.query.id
+      this.LanBlogs.blogsAuthorId = this.$route.query.blogsAuthorId
+      this.$axios.post('/blogTemp/editorTempBlog', {
+        id: this.LanBlogs.id
+      }).then((response) => {
+        this.LanBlogs = response.data
+      }).catch(() => {
+        this.$message('获取失败')
+      })
+    } else {
+      this.getAuthorID()
+    }
     this.LoadLanName()
   },
   methods: {
